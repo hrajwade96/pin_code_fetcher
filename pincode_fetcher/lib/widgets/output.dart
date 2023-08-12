@@ -1,67 +1,65 @@
-import 'package:flutter/material.dart';  
+import 'package:flutter/material.dart';
+
+import 'model/location_details.dart';  
 
 class GenerateAddressOutput extends StatefulWidget {
-  final List<DataRow> dataList;
-   GenerateAddressOutput({required this.dataList});
-  
+  GenerateAddressOutput({required this.data});
+  LocationData data;
   @override  
   _DataTableExample createState() => _DataTableExample();  
 }  
   
 class _DataTableExample extends State<GenerateAddressOutput> {  
+    // final List<DataRow> dataList= widget.data;
+
   @override  
   Widget build(BuildContext context) {  
-    return MaterialApp(  
-      home: Scaffold(  
-          appBar: AppBar(  
-            title: const Text('Flutter DataTable Example'),  
-          ),  
-          body: ListView(children: <Widget>[  
+    return ListView(children: <Widget>[  
             const Center(  
-                child: Text(  
-                  'People-Chart',  
-                  style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),  
+                child: SizedBox(
+                  child: Text(  
+                    'Location Details',  
+                    style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),  
+                  ),
                 )),  
             DataTable(  
               columns: const [  
                 DataColumn(label: Text(  
-                    'ID',  
+                    'Pincode',  
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)  
                 )),  
                 DataColumn(label: Text(  
-                    'Name',  
+                    'State',  
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)  
                 )),  
                 DataColumn(label: Text(  
-                    'Profession',  
+                    'City',  
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)  
-                )),  
+                )),
+                DataColumn(label: Text(  
+                    'Area',  
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)  
+                )),
+                DataColumn(label: Text(  
+                    'Locality',  
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)  
+                ))  
               ],  
-              rows: const [  
-                DataRow(cells: [  
-                  DataCell(Text('1')),  
-                  DataCell(Text('Stephen')),  
-                  DataCell(Text('Actor')),  
-                ]),  
-                DataRow(cells: [  
-                  DataCell(Text('5')),  
-                  DataCell(Text('John')),  
-                  DataCell(Text('Student')),  
-                ]),  
-                DataRow(cells: [  
-                  DataCell(Text('10')),  
-                  DataCell(Text('Harry')),  
-                  DataCell(Text('Leader')),  
-                ]),  
-                DataRow(cells: [  
-                  DataCell(Text('15')),  
-                  DataCell(Text('Peter')),  
-                  DataCell(Text('Scientist')),  
-                ]),  
+              rows: [  
+                if(widget.data.results!=null)
+                for(var i in widget.data.results!) _buildTableRow(i)  
+ 
               ],  
             ),  
-          ])  
-      ),  
-    );  
+          ]);
   }  
+    DataRow _buildTableRow(Results result) {
+    return DataRow(cells: [  
+                  DataCell(Text(result.postalCode??'')),  
+                  DataCell(Text(result.adminName1??'')),  
+                  DataCell(Text(result.adminName2??'')),
+                  DataCell(Text(result.adminName3??'')),
+                  DataCell(Text(result.placeName??'')),
+                ]); 
+  }
 }
