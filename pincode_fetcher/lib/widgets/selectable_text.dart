@@ -10,7 +10,7 @@ class Selectable extends StatelessWidget {
   Widget build(BuildContext context) {
     return SelectableText.rich(
   TextSpan( 
-      style: TextStyle(fontSize: 20),
+      style: TextStyle(fontSize: 18),
       children: [
         TextSpan(text:text),
       ]
