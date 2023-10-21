@@ -15,38 +15,49 @@ class DataTableExample extends State<GenerateAddressOutput> {
 
   @override
   Widget build(BuildContext context) {
-    return ListView(children: <Widget>[
-      const Center(
-          child: SizedBox(
-        child: Text(
-          'Location Details',
-          style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+    final ScrollController controller1 = ScrollController();
+      final ScrollController controller2 = ScrollController();
+
+    return Scrollbar(
+      child: SingleChildScrollView(
+        controller: controller2,
+        child: SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          controller: controller1,
+          child: 
+          // const Center(
+          //     child: SizedBox(
+          //   child: Text(
+          //     'Location Details',
+          //     style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+          //   ),
+          // )),
+          DataTable(
+            columns: const [
+              DataColumn(
+                  label: Text('Pincode',
+                      style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold))),
+              DataColumn(
+                  label: Text('State',
+                      style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold))),
+              DataColumn(
+                  label: Text('City',
+                      style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold))),
+              DataColumn(
+                  label: Text('Area',
+                      style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold))),
+              DataColumn(
+                  label: Text('Locality',
+                      style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)))
+            ],
+            rows: [
+              if (widget.data.results != null)
+                for (var i in widget.data.results!) _buildTableRow(i)
+            ],
+          ),
         ),
-      )),
-      DataTable(
-        columns: const [
-          DataColumn(
-              label: Text('Pincode',
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold))),
-          DataColumn(
-              label: Text('State',
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold))),
-          DataColumn(
-              label: Text('City',
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold))),
-          DataColumn(
-              label: Text('Area',
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold))),
-          DataColumn(
-              label: Text('Locality',
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)))
-        ],
-        rows: [
-          if (widget.data.results != null)
-            for (var i in widget.data.results!) _buildTableRow(i)
-        ],
       ),
-    ]);
+    );
   }
 
   DataRow _buildTableRow(Results result) {
