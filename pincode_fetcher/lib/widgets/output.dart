@@ -16,7 +16,7 @@ class DataTableExample extends State<GenerateAddressOutput> {
   @override
   Widget build(BuildContext context) {
     final ScrollController controller1 = ScrollController();
-      final ScrollController controller2 = ScrollController();
+    final ScrollController controller2 = ScrollController();
 
     return Scrollbar(
       child: SingleChildScrollView(
@@ -24,31 +24,36 @@ class DataTableExample extends State<GenerateAddressOutput> {
         child: SingleChildScrollView(
           scrollDirection: Axis.horizontal,
           controller: controller1,
-          child: 
-          // const Center(
-          //     child: SizedBox(
-          //   child: Text(
-          //     'Location Details',
-          //     style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
-          //   ),
-          // )),
-          DataTable(
+          child:
+              // const Center(
+              //     child: SizedBox(
+              //   child: Text(
+              //     'Location Details',
+              //     style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+              //   ),
+              // )),
+              DataTable(
             columns: const [
               DataColumn(
                   label: Text('Pincode',
-                      style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold))),
+                      style: TextStyle(
+                          fontSize: 18, fontWeight: FontWeight.bold))),
               DataColumn(
                   label: Text('State',
-                      style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold))),
+                      style: TextStyle(
+                          fontSize: 18, fontWeight: FontWeight.bold))),
               DataColumn(
                   label: Text('City',
-                      style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold))),
+                      style: TextStyle(
+                          fontSize: 18, fontWeight: FontWeight.bold))),
               DataColumn(
                   label: Text('Area',
-                      style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold))),
+                      style: TextStyle(
+                          fontSize: 18, fontWeight: FontWeight.bold))),
               DataColumn(
                   label: Text('Locality',
-                      style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)))
+                      style:
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold)))
             ],
             rows: [
               if (widget.data.results != null)

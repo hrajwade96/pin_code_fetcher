@@ -1,4 +1,3 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -22,10 +21,11 @@ class MobileView extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Padding(
-        padding: EdgeInsets.fromLTRB(MediaQuery.sizeOf(context).width*0.1, 0, MediaQuery.sizeOf(context).width*0.1, 0),
+        padding: EdgeInsets.fromLTRB(MediaQuery.sizeOf(context).width * 0.1, 0,
+            MediaQuery.sizeOf(context).width * 0.1, 0),
         child: Column(children: [
           Padding(
-            padding: const EdgeInsets.only(top:32.0),
+            padding: const EdgeInsets.only(top: 32.0),
             child: Container(
               // Add padding around the search bar
               padding: const EdgeInsets.symmetric(horizontal: 8.0),
@@ -64,34 +64,39 @@ class MobileView extends StatelessWidget {
           ),
           Observer(builder: (context) {
             final data = store.addressData.value?.value;
-            if (store.addressData.value?.status == FutureStatus.pending){
-              debugPrint('Loading Widget.${DateTime.now().millisecondsSinceEpoch}');
-            return SizedBox(
+            if (store.addressData.value?.status == FutureStatus.pending) {
+              debugPrint(
+                  'Loading Widget.${DateTime.now().millisecondsSinceEpoch}');
+              return SizedBox(
                 child: Padding(
-                  padding: EdgeInsets.all(MediaQuery.sizeOf(context).height*0.25),
+                  padding:
+                      EdgeInsets.all(MediaQuery.sizeOf(context).height * 0.25),
                   child: Column(
                     children: [
                       Padding(
-                        padding: EdgeInsets.all(MediaQuery.sizeOf(context).aspectRatio*2.45),
+                        padding: EdgeInsets.all(
+                            MediaQuery.sizeOf(context).aspectRatio * 2.45),
                         child: LoadingAnimationWidget.discreteCircle(
                           color: Colors.red,
                           size: 50,
-                            ),
+                        ),
                       ),
                       Padding(
-                        padding: EdgeInsets.all(MediaQuery.sizeOf(context).aspectRatio*3.45),
-                        child: const Text('Loading...',style: TextStyle(fontSize: 35)),
+                        padding: EdgeInsets.all(
+                            MediaQuery.sizeOf(context).aspectRatio * 3.45),
+                        child: const Text('Loading...',
+                            style: TextStyle(fontSize: 35)),
                       ),
                     ],
-                  )
-                     ,
+                  ),
                 ),
               );
-              }
-    
+            }
+
             debugPrint('data is $data');
             if (store.addressData.value?.status == FutureStatus.fulfilled) {
-              debugPrint('Finished Widget.${DateTime.now().millisecondsSinceEpoch}');
+              debugPrint(
+                  'Finished Widget.${DateTime.now().millisecondsSinceEpoch}');
               if (data != null && data.results!.length > 0) {
                 store.count = 0;
                 return SizedBox(
@@ -101,8 +106,13 @@ class MobileView extends StatelessWidget {
               } else {
                 if (store.count < 5) {
                   store.fetchAddress(_searchController.text);
-                }else{
-                  return Center(child: Text('No results found!',style: TextStyle(fontSize: 20),),);
+                } else {
+                  return Center(
+                    child: Text(
+                      'No results found!',
+                      style: TextStyle(fontSize: 20),
+                    ),
+                  );
                 }
                 return Container();
               }

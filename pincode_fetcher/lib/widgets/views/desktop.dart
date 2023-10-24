@@ -7,12 +7,14 @@ import '../../stores/location_store.dart';
 import '../output.dart';
 
 class DesktopView extends StatelessWidget {
-   double? height;
-   double? width;
-   DesktopView({
+  double? height;
+  double? width;
+  DesktopView({
     super.key,
     required TextEditingController searchController,
-    required this.store,  this.height,  this.width,
+    required this.store,
+    this.height,
+    this.width,
   }) : _searchController = searchController;
 
   final TextEditingController _searchController;
@@ -20,13 +22,14 @@ class DesktopView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-   height = MediaQuery.sizeOf(context).height;
-  width = MediaQuery.sizeOf(context).width;
+    height = MediaQuery.sizeOf(context).height;
+    width = MediaQuery.sizeOf(context).width;
     return Padding(
-      padding: EdgeInsets.fromLTRB(0.1*width!.toDouble(), 0, ((0.2*width!.toDouble())), 0),
+      padding: EdgeInsets.fromLTRB(
+          0.1 * width!.toDouble(), 0, ((0.2 * width!.toDouble())), 0),
       child: Column(children: [
         Padding(
-          padding: const EdgeInsets.only(top:32.0),
+          padding: const EdgeInsets.only(top: 32.0),
           child: Container(
             // Add padding around the search bar
             padding: const EdgeInsets.symmetric(horizontal: 8.0),
@@ -65,51 +68,56 @@ class DesktopView extends StatelessWidget {
         ),
         Observer(builder: (context) {
           final data = store.addressData.value?.value;
-          if (store.addressData.value?.status == FutureStatus.pending){
-            debugPrint('Loading Widget.${DateTime.now().millisecondsSinceEpoch}');
-          return Stack(
-            children:[ SizedBox(
-                  child: Center(
-                    child: Padding(
-                      padding: EdgeInsets.all(MediaQuery.sizeOf(context).height*0.25),
-                      child: Column(
-                        children: [       
-                          Padding(
-                            padding: EdgeInsets.all(MediaQuery.sizeOf(context).aspectRatio*2.45),
-                            child: LoadingAnimationWidget.discreteCircle(
-                              color: Colors.red,
-                              size: 50,
-                                ),
+          if (store.addressData.value?.status == FutureStatus.pending) {
+            debugPrint(
+                'Loading Widget.${DateTime.now().millisecondsSinceEpoch}');
+            return Stack(children: [
+              SizedBox(
+                child: Center(
+                  child: Padding(
+                    padding: EdgeInsets.all(
+                        MediaQuery.sizeOf(context).height * 0.25),
+                    child: Column(
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.all(
+                              MediaQuery.sizeOf(context).aspectRatio * 2.45),
+                          child: LoadingAnimationWidget.discreteCircle(
+                            color: Colors.red,
+                            size: 50,
                           ),
-                          if(MediaQuery.sizeOf(context).width>1024)
+                        ),
+                        if (MediaQuery.sizeOf(context).width > 1024)
                           Padding(
-                            padding: EdgeInsets.all(MediaQuery.sizeOf(context).aspectRatio*3.45),
-                            child: const Text('Loading...',style: TextStyle(fontSize: 35)),
+                            padding: EdgeInsets.all(
+                                MediaQuery.sizeOf(context).aspectRatio * 3.45),
+                            child: const Text('Loading...',
+                                style: TextStyle(fontSize: 35)),
                           ),
-                        ],
-                      )
-                         ,
+                      ],
                     ),
                   ),
                 ),
-      ]);
-
-            }
+              ),
+            ]);
+          }
 
           debugPrint('data is $data');
           if (store.addressData.value?.status == FutureStatus.fulfilled) {
-            debugPrint('Finished Widget.${DateTime.now().millisecondsSinceEpoch}');
+            debugPrint(
+                'Finished Widget.${DateTime.now().millisecondsSinceEpoch}');
             if (data != null && data.results!.length > 0) {
               store.count = 0;
               return Column(
                 children: [
-                            const Center(
-              child: SizedBox(
-            child: Text(
-              'Location Details',
-              style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
-            ),
-          )),
+                  const Center(
+                      child: SizedBox(
+                    child: Text(
+                      'Location Details',
+                      style:
+                          TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+                    ),
+                  )),
                   SizedBox(
                     height: 600,
                     child: GenerateAddressOutput(data: data),
@@ -119,8 +127,13 @@ class DesktopView extends StatelessWidget {
             } else {
               if (store.count < 5) {
                 store.fetchAddress(_searchController.text);
-              }else{
-                return Center(child: Text('No results found!',style: TextStyle(fontSize: 20),),);
+              } else {
+                return Center(
+                  child: Text(
+                    'No results found!',
+                    style: TextStyle(fontSize: 20),
+                  ),
+                );
               }
               return Container();
             }

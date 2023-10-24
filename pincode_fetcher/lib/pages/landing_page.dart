@@ -30,7 +30,9 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: const Text('Pincode Fetcher'),
       ),
-      body:Center(child: DesktopView(searchController: _searchController, store: store)), 
+      body: Center(
+          child:
+              DesktopView(searchController: _searchController, store: store)),
     );
   }
 }
