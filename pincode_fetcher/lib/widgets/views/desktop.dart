@@ -106,7 +106,7 @@ class DesktopView extends StatelessWidget {
           if (store.addressData.value?.status == FutureStatus.fulfilled) {
             debugPrint(
                 'Finished Widget.${DateTime.now().millisecondsSinceEpoch}');
-            if (data != null && data.results!.length > 0) {
+            if (data != null && data.results!.isNotEmpty) {
               store.count = 0;
               return Column(
                 children: [
@@ -128,7 +128,7 @@ class DesktopView extends StatelessWidget {
               if (store.count < 5) {
                 store.fetchAddress(_searchController.text);
               } else {
-                return Center(
+                return const Center(
                   child: Text(
                     'No results found!',
                     style: TextStyle(fontSize: 20),

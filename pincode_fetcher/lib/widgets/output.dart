@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'selectable_text.dart' as st;
 import '../model/location_details.dart';
 
