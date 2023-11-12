@@ -15,7 +15,8 @@ class DesktopView extends StatelessWidget {
     required this.store,
     this.height,
     this.width,
-  }) : _searchController = searchController, super(key: key);
+  })  : _searchController = searchController,
+        super(key: key);
 
   final TextEditingController _searchController;
   final LocationStore store;
@@ -35,19 +36,23 @@ class DesktopView extends StatelessWidget {
           ),
           // Overlaying with a pattern. This is just an example, and you might need to fetch a pattern of your choice.
           image: DecorationImage(
-            image: const AssetImage('path_to_your_pattern.png'),  // Replace with the path to your pattern image
+            image: const AssetImage(
+                '/Users/hrishikeshrajwade/StudioProjects/pin_code_fetcher/pincode_fetcher/assets/template1.png'), // Replace with the path to your pattern image
             fit: BoxFit.cover,
             colorFilter: ColorFilter.mode(
-              Colors.black.withOpacity(0.1),  // Adjust this value to make the pattern more or less visible
+              Colors.black.withOpacity(
+                  0.7), // Adjust this value to make the pattern more or less visible
               BlendMode.dstATop,
             ),
           ),
         ),
-
-        child: SingleChildScrollView( // Add SingleChildScrollView
+        child: SingleChildScrollView(
+          // Add SingleChildScrollView
           padding: EdgeInsets.symmetric(
-            horizontal: 0.15 * width!, // Adjust the horizontal padding symmetrically
-            vertical: 0.15 * height!, // You can also adjust the vertical padding as needed
+            horizontal:
+                0.15 * width!, // Adjust the horizontal padding symmetrically
+            vertical: 0.12 *
+                height!, // You can also adjust the vertical padding as needed
           ),
           child: Column(children: [
             // Stylized Search Bar
@@ -58,44 +63,57 @@ class DesktopView extends StatelessWidget {
                 width: 0.6 * width!,
                 height: 60,
                 decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(25.0),
+                  color: Colors.white
+                      .withOpacity(0.5), // Adjust the opacity as needed
+                  borderRadius:
+                      BorderRadius.circular(25), // Optional rounded corners
+                  border: Border.all(
+                    color: Colors.white, // Color for the border
+                    width: 1.0, // Width of the border
+                  ),
+
                   boxShadow: [
                     BoxShadow(
-                      color: Colors.black.withOpacity(0.1),
+                      color: Colors.grey.withOpacity(0.5),
                       spreadRadius: 2,
                       blurRadius: 4,
                       offset: const Offset(0, 3),
                     ),
                   ],
                 ),
-                child: Center(  // Added this to center-align the TextField
+                child: Center(
+                  // Added this to center-align the TextField
                   child: TextField(
                     controller: _searchController,
                     style: const TextStyle(fontSize: 18),
                     decoration: InputDecoration(
                       hintText: 'Enter your pincode/state/city/area!',
                       suffixIcon: IconButton(
-                        iconSize: 20,  // Adjust as per requirement
+                        iconSize: 20, // Adjust as per requirement
                         icon: const Icon(Icons.clear),
                         onPressed: () => _searchController.clear(),
                       ),
                       prefixIcon: IconButton(
-                        iconSize: 20,  // Adjust as per requirement
+                        iconSize: 20, // Adjust as per requirement
                         icon: const Icon(Icons.search),
                         onPressed: () {
                           store.count = 0;
                           store.searchQuery = _searchController.text;
-                          store.fetchAddress(_searchController.text);
+                          if (store.searchQuery.isNotEmpty) {
+                            store.fetchAddress(_searchController.text);
+                          }
                         },
                       ),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(25.0),
                         borderSide: BorderSide.none,
                       ),
-                      contentPadding: const EdgeInsets.symmetric(vertical: 0.0, horizontal: 20.0),  // Further adjusted for better alignment
-                      isDense: true,  // Added this to adjust vertical alignment
-                      alignLabelWithHint: true,  // Helpful if using labelText
+                      contentPadding: const EdgeInsets.symmetric(
+                          vertical: 0.0,
+                          horizontal:
+                              20.0), // Further adjusted for better alignment
+                      isDense: true, // Added this to adjust vertical alignment
+                      alignLabelWithHint: true, // Helpful if using labelText
                     ),
                   ),
                 ),
@@ -108,22 +126,25 @@ class DesktopView extends StatelessWidget {
             Observer(builder: (context) {
               final data = store.addressData.value?.value;
               if (store.addressData.value?.status == FutureStatus.pending) {
-                return Center( // Wrap with Center widget to align the content
+                return Center(
+                  // Wrap with Center widget to align the content
                   child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,  // To vertically center-align the items
+                    mainAxisAlignment: MainAxisAlignment
+                        .center, // To vertically center-align the items
                     children: [
                       LoadingAnimationWidget.discreteCircle(
                         color: Colors.red,
                         size: 50,
                       ),
                       const SizedBox(
-                        height: 20,  // Increase this value to add more space
+                        height: 20, // Increase this value to add more space
                       ),
                       const Text('Loading...', style: TextStyle(fontSize: 35)),
                     ],
                   ),
                 );
               }
+
               if (store.addressData.value?.status == FutureStatus.fulfilled) {
                 if (data != null && data.results!.isNotEmpty) {
                   store.count = 0;
@@ -134,21 +155,37 @@ class DesktopView extends StatelessWidget {
                           'Location Details',
                           style: TextStyle(
                             fontSize: 28, // Increased font size
-                            fontWeight: FontWeight.bold,
-                            shadows: [ // Added shadow for a bit of depth
+                            fontWeight: FontWeight.w800,
+                            color: Colors.white, // Set the text color to white
+                            shadows: [
+                              // Added shadow for a bit of depth
                               Shadow(
                                 offset: Offset(1.0, 1.0),
                                 blurRadius: 2.0,
-                                color: Color.fromARGB(125, 0, 0, 255),
+                                color: Color.fromRGBO(0, 0, 0,
+                                    0.25), // Shadow is now a semi-transparent black
                               ),
                             ],
                           ),
                         ),
                       ),
-                      const SizedBox(height: 20),  // Added space between the text and the table
+                      const SizedBox(
+                          height:
+                              20), // Added space between the text and the table
                       SizedBox(
                         height: 600,
-                        child: GenerateAddressOutput(data: data),
+                        child: Container(
+                            decoration: BoxDecoration(
+                              color: Colors.white.withOpacity(
+                                  0.5), // Adjust the opacity as needed
+                              borderRadius: BorderRadius.circular(
+                                  10), // Optional rounded corners
+                              border: Border.all(
+                                color: Colors.white, // Color for the border
+                                width: 1.0, // Width of the border
+                              ),
+                            ),
+                            child: GenerateAddressOutput(data: data)),
                       ),
                     ],
                   );
@@ -159,7 +196,8 @@ class DesktopView extends StatelessWidget {
                     return const Center(
                       child: Text(
                         'No results found!',
-                        style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                        style: TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.bold),
                       ),
                     );
                   }

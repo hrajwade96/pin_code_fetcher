@@ -74,6 +74,7 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
       appBar: AppBar(
+        backgroundColor: Colors.blueGrey,
         title: const Text('Pincode Fetcher'),
       ),
       body: Center(

@@ -40,6 +40,7 @@ class _GenerateAddressOutputState extends State<GenerateAddressOutput> {
           child: SingleChildScrollView(
             scrollDirection: Axis.horizontal,
             child: ConstrainedBox(
+
               constraints: BoxConstraints(minWidth: constraints.maxWidth),
               child: DataTable(
                 showBottomBorder: true,
