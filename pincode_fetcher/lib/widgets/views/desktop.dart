@@ -37,7 +37,7 @@ class DesktopView extends StatelessWidget {
           // Overlaying with a pattern. This is just an example, and you might need to fetch a pattern of your choice.
           image: DecorationImage(
             image: const AssetImage(
-                '/Users/hrishikeshrajwade/StudioProjects/pin_code_fetcher/pincode_fetcher/assets/template1.png'), // Replace with the path to your pattern image
+                'assets/template1.png'), // Replace with the path to your pattern image
             fit: BoxFit.cover,
             colorFilter: ColorFilter.mode(
               Colors.black.withOpacity(
