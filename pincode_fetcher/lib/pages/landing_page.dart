@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pincode_fetcher/stores/view_port_store.dart';
+import '../appbars/common_appbar.dart';
 import '../stores/location_store.dart';
 import '../widgets/views/desktop.dart';
 import 'about_us.dart';
@@ -24,7 +25,7 @@ class _MyHomePageState extends State<MyHomePage> {
     final viewport = ViewportStore();
 
     return Scaffold(
-      drawer: Drawer(
+      /*drawer: Drawer(
         // Add a ListView to the drawer. This ensures the user can scroll
         // through the options in the drawer if there isn't enough vertical
         // space to fit everything.
@@ -72,11 +73,8 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
           ],
         ),
-      ),
-      appBar: AppBar(
-        backgroundColor: Colors.blueGrey,
-        title: const Text('Pincode Fetcher'),
-      ),
+      ),*/
+      appBar: buildAppBar(context),
       body: Center(
           child:
               DesktopView(searchController: _searchController, store: store)),

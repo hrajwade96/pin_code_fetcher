@@ -7,9 +7,10 @@ class Selectable extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SelectableText.rich(
-        TextSpan(style: const TextStyle(fontSize: 18,fontWeight: FontWeight.w900), children: [
-      TextSpan(text: text),
-    ]));
+    return SelectableText.rich(TextSpan(
+        style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w900),
+        children: [
+          TextSpan(text: text),
+        ]));
   }
 }
