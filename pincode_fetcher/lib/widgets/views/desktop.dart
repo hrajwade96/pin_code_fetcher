@@ -84,6 +84,9 @@ class DesktopView extends StatelessWidget {
                 child: Center(
                   // Added this to center-align the TextField
                   child: TextField(
+                    onSubmitted: (value) {
+                      _handleOnClick();
+                    },
                     controller: _searchController,
                     style: const TextStyle(fontSize: 18),
                     decoration: InputDecoration(
@@ -97,11 +100,7 @@ class DesktopView extends StatelessWidget {
                         iconSize: 20, // Adjust as per requirement
                         icon: const Icon(Icons.search),
                         onPressed: () {
-                          store.count = 0;
-                          store.searchQuery = _searchController.text;
-                          if (store.searchQuery.isNotEmpty) {
-                            store.fetchAddress(_searchController.text);
-                          }
+                          _handleOnClick();
                         },
                       ),
                       border: OutlineInputBorder(
@@ -209,5 +208,13 @@ class DesktopView extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  void _handleOnClick() {
+    store.count = 0;
+    store.searchQuery = _searchController.text;
+    if (store.searchQuery.isNotEmpty) {
+      store.fetchAddress(_searchController.text);
+    }
   }
 }
