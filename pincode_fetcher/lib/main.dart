@@ -2,7 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:pincode_fetcher/pages/landing_page.dart';
 // ignore: depend_on_referenced_packages
 
+import 'firebase_options.dart';
+import 'firebase_sdk/firebase_init.dart';
+
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  var firebaseHelper = FirebaseHelper();
+  await firebaseHelper.init(DefaultFirebaseOptions.currentPlatform);
   runApp(const MyApp());
 }
 

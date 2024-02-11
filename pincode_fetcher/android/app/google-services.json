@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "660561097855",
+    "firebase_url": "https://pincode-fetcher-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "pincode-fetcher",
+    "storage_bucket": "pincode-fetcher.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:660561097855:android:4f7dcae5506e4212887b4a",
+        "android_client_info": {
+          "package_name": "com.example.pincode_fetcher"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBeKd6mLo_9vMTaFpGmeU6bBPs8f9VDm0c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

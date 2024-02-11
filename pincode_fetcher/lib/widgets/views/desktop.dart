@@ -3,6 +3,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:mobx/mobx.dart';
 
+import '../../firebase_sdk/firebase_init.dart';
 import '../../stores/location_store.dart';
 import '../output.dart';
 
@@ -216,5 +217,7 @@ class DesktopView extends StatelessWidget {
     if (store.searchQuery.isNotEmpty) {
       store.fetchAddress(_searchController.text);
     }
+    var firebaseHelper = FirebaseHelper();
+    firebaseHelper.logEventData('searchOnClick', {});
   }
 }
